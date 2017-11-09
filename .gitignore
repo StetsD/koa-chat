@@ -48,6 +48,5 @@ YoutubeTutorial-win32-x64/
 # frontend #
 ######################
 
-/public
 /.sass-cache
 /bower_components

@@ -14,7 +14,7 @@ handlers.forEach(handler => require('./handlers/' + handler).init(app));
 
 
 router.get('/', (ctx, next) => {
-
+    ctx.render('./templates/index.pug', {msg: 'mazafaka'});
 });
 
 app.use(router.routes());
