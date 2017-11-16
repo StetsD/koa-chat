@@ -21,7 +21,7 @@ export default class Header extends Component {
                             <Link to="/registration">Registration</Link>
                         </li>
                         <li role="presentation" className="">
-                            <Link to="/сhat">Chat</Link>
+                            <Link to="/chat">Chat</Link>
                         </li>
                     </ul>
                 </div>

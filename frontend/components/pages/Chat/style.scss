@@ -1,0 +1,25 @@
+.chat-wrapper{
+	display: flex;
+
+}
+
+.chat-user-list{
+
+}
+
+.chat-window{
+	width: 90%;
+	height: 380px;
+	border: 1px solid #666666;
+	overflow-y: auto;
+	margin: 0 0 0 100px;
+	background-color: #ffffff;
+}
+
+.chat-msg-item{
+	margin-bottom: 20px;
+	& p{
+		font-size: 12px;
+		margin: 0;
+	}
+}
