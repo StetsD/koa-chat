@@ -5,6 +5,7 @@ import {Router, Route, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import Routes from './routes';
 import store from './store';
+import jquery from 'jquery';
 
 const history = syncHistoryWithStore(browserHistory, store);
 

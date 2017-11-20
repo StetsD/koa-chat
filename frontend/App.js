@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
 import {Header} from './components/blocks';
 import {connect} from 'react-redux';
+import './css/common.scss';
 
 
 class App extends Component {

@@ -2,10 +2,16 @@ const webpack = require('webpack');
 const path = require('path');
 const config = require('./config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const jquery = require('jquery');
 
 const HWP = new HtmlWebpackPlugin({
 	path: config.paths.public,
 	template: `${config.paths.public}/index.html`
+});
+
+const WPP = new webpack.ProvidePlugin({
+	$: 'jquery',
+	jQuery: 'jquery'
 });
 
 
@@ -24,6 +30,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		HWP
+		HWP, WPP
 	]
 };

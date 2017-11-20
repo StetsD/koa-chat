@@ -1,0 +1,9 @@
+.form-group{
+	&.error input{
+		border: 1px solid red;
+	}
+
+	&.error .form-msg{
+		color: red;
+	}
+}
