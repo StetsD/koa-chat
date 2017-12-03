@@ -8,6 +8,8 @@ const path = require('path');
 const db = require('./db');
 const router = require('./router');
 
+app.keys = config.keys;
+
 let handlers = fs.readdirSync('./handlers');
 handlers.forEach(handler => require('./handlers/' + handler).init(app));
 
