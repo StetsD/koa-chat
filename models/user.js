@@ -1,24 +1,68 @@
 const mongoose = require('mongoose');
+const crypto = require('crypto');
+const _ = require('lodash');
+const config = require('../config');
 
-let UserSchema = mongoose.Schema({
+let UserSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		unique: true,
-		required: 'Username is required field'
+		required: "Username is required"
 	},
-	password: String
+	deleted: Boolean,
+	passwordHash: {
+		type: String,
+		required: true
+	},
+	salt: {
+		required: true,
+		type: String
+	}
+}, {
+	timestamp: true
 });
 
-const UserModel = mongoose.model('User', UserSchema);
+UserSchema.virtual('password')
+  .set(function(password) {
 
-async function saveUser(user){
-	return await UserModel.create(user);
-}
+    if (password !== undefined) {
+      if (password.length < 4) {
+        this.invalidate('password', 'Пароль должен быть минимум 4 символа.');
+      }
+    }
 
-async function getUserByName(user){
-	return await UserModel.find({username: user.username});
-}
+    this._plainPassword = password;
 
-module.exports = {
-	saveUser, getUserByName
-}
+    if (password) {
+      this.salt = crypto.randomBytes(config.crypto.hash.length).toString('base64');
+      this.passwordHash = crypto.pbkdf2Sync(
+        password,
+        this.salt,
+        config.crypto.hash.iterations,
+        config.crypto.hash.length,
+        'sha1'
+      ).toString('base64');
+    } else {
+      this.salt = undefined;
+      this.passwordHash = undefined;
+    }
+  })
+  .get(function() {
+    return this._plainPassword;
+  });
+
+UserSchema.methods.checkPassword = function(password) {
+  if (!password) return false;
+  if (!this.passwordHash) return false;
+
+  return crypto.pbkdf2Sync(
+    password,
+    this.salt,
+    config.crypto.hash.iterations,
+    config.crypto.hash.length,
+    'sha1'
+  ).toString('base64') == this.passwordHash;
+};
+
+
+module.exports = mongoose.model('User', UserSchema);

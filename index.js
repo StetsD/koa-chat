@@ -8,11 +8,12 @@ const path = require('path');
 const db = require('./db');
 const router = require('./router');
 
+app.keys = [config.secret];
+
+
 let handlers = fs.readdirSync('./handlers');
 handlers.forEach(handler => require('./handlers/' + handler).init(app));
-
-app.use(router.routes());
-
+app.use(require('koa-passport').session());
 app.use(async (ctx, next) => {
 	try{
 		await next();
@@ -27,5 +28,9 @@ app.use(async (ctx, next) => {
 		}
 	}
 });
+
+app.use(router.routes());
+
+
 
 app.listen(config.port);
