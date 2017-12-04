@@ -1,5 +1,5 @@
 const localStrategy = require('passport-local');
-const passport = require('passport');
+const passport = require('koa-passport');
 const User = require('../../models/user');
 
 passport.use(new localStrategy(

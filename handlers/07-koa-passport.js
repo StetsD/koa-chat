@@ -1,2 +1,2 @@
 const passport = require('../libs/passport');
-exports.init = app => app.use(passport.initialize(), passport.session());
+exports.init = app => app.use(passport.initialize());

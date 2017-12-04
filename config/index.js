@@ -5,12 +5,13 @@ module.exports = {
 	paths: {
 		public: path.join(process.cwd(), '/public')
 	},
-	keys: ['secret-key'],
+	keys: 'mysecret',
 	crypto: {
 		hash: {
 			length: 128,
 			iterations: 12000
-		}
+		},
+		algorithm: 'sha256'
 	}
 
 }
