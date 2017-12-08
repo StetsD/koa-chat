@@ -33,10 +33,23 @@ router.post('/registration', async (ctx, next) => {
 });
 
 router.post('/login', async (ctx, next) => {
-    await passport.authenticate('local', (username, password, done)=>{
-        ctx.status = 200;
-        ctx.body = {status: 'success'};
-        return done();
+    await passport.authenticate('local', async (err, user, msg)=>{
+        if(err) return msg;
+        if(!user){
+            ctx.status = 400;
+            ctx.body = msg;
+            return next();
+        }
+        ctx.login(user)
+            .then(res => {
+                ctx.status = 200;
+                ctx.body = {status: 'success'};
+                return next();
+            })
+            .catch(err => {
+                ctx.status = 500;
+                return next();
+            });
     })(ctx, next);
 });
 

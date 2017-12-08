@@ -1,8 +1,9 @@
-const session = require('koa-generic-session');
+const session = require('koa-session');
 const mongooseStore = require('koa-session-mongoose');
 const convert = require('koa-convert');
+const db = require('../db');
 
-exports.init = app => app.use(convert(session({
+exports.init = app => app.use(session({
 	key: 'sid',
 	rolling: true,
 	cookie: {
@@ -12,8 +13,10 @@ exports.init = app => app.use(convert(session({
 		maxAge: 86400,
 		overwrite: true
 	},
-	store: mongooseStore.create({
-		model:   'Session',
-		expires: 3600 * 4
+	store: new mongooseStore({
+		collection: 'Session',
+		connection: db,
+		expires: 84400,
+		name: 'SII'
 	})
-})));
+}, app));

@@ -50,3 +50,5 @@ YoutubeTutorial-win32-x64/
 
 /.sass-cache
 /bower_components
+
+package-lock\.json

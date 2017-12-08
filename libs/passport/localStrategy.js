@@ -11,11 +11,11 @@ passport.use(new localStrategy(
         User.findOne({username}, (err, user) => {
             if(err) return done(err);
 
-            if(!user || user.checkPassword(password)){
-                return done(null, false, {errors: {password: {message: 'Bad Password or User not found'}}});
+            if(user && user.checkPassword(password)){
+                return done(null, user);
             }
 
-            return done(null, user);
+            return done(null, false, {errors: {password: {message: 'Bad Password or User not found'}}});
         });
     }
 ))

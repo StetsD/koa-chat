@@ -58,7 +58,7 @@ UserSchema.methods.checkPassword = function(password){
 		config.crypto.hash.iterations,
 		config.crypto.hash.length,
 		config.crypto.algorithm
-	).toString('base64') == this.passwordHash;
+	).toString('base64') === this.passwordHash;
 }
 
 module.exports = mongoose.model('User', UserSchema);
