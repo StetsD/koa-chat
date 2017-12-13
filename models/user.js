@@ -15,10 +15,20 @@ let UserSchema = new mongoose.Schema({
 	salt: {
 		type: String,
 		required: 'Salt field is required'
+	},
+	verify: {
+		type: Boolean,
+		default: false
+	},
+	email: {
+		type: String,
+		required: 'Email is required'
 	}
 }, {
 	timestamp: true
 });
+
+
 
 UserSchema.virtual('password')
 	.set(function(password){

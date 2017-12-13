@@ -6,5 +6,5 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-	User.findOne({username: user.username}, done);
+	User.findOne({username: user}, done);
 });

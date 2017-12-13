@@ -61,6 +61,11 @@ export default class Reg extends Component{
 								</FormGroup>
 
 								<FormGroup>
+									<ControlLabel>Email</ControlLabel>
+									<FormControl type="text" placeholder="email" name="email" data-validation="required"/>
+								</FormGroup>
+
+								<FormGroup>
 									<ControlLabel>Password</ControlLabel>
 									<FormControl type="password" placeholder="Password" name="password" data-validation="password"/>
 									<div className="form-msg"></div>
